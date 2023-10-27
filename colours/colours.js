@@ -3,28 +3,36 @@ const $ = selector => document.querySelector(selector);
 const tryHere = evt => {
     // evt.target is the element that caused the event.
     const value = evt.target.value; 
+    console.log(value)
     if(value == 1){
-        var setColour = 'var(--red)';
+        var setColor = 'var(--red)';
+        evt.target.value = 2;
     } else if(value == 2){ 
-        var setColour = 'var(--green)';
+        var setColor = 'var(--green)';
+        evt.target.value = 3;
     } else if(value == 3){
-        var setColour = 'var(--blue)';
+        var setColor = 'var(--blue)';
+        evt.target.value = 4;
     } else if(value == 4){     
-        var setColour = 'var(--yellow)';
+        var setColor = 'var(--yellow)';
+        evt.target.value = 5;
     } else if(value == 5){
-        var setColour = 'var(--orange)';
+        var setColor = 'var(--orange)';
+        evt.target.value = 6;
     } else if(value == 6){
-        var setColour = 'var(--violet)';
+        var setColor = 'var(--violet)';
+        evt.target.value = 7;
     } else if(value == 7){
-        var setColour = 'var(--black)';
+        var setColor = 'var(--black)';
+        evt.target.value = 8;
     }
     
-    evt.target.style.backgroundColor  = setColour;
+    evt.target.style.backgroundColor  = setColor;
+}
 
-    var newValue = value + 1;
-    evt.target.value = newValue;
-    
-    
+const reset = evt => {
+    evt.target.value = 1;
+    evt.target.style.backgroundColor = 'var(--white)';
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -35,11 +43,21 @@ document.addEventListener("DOMContentLoaded", () => {
         for (j = 0; j <= 20; j++){
             const node = document.createElement("button");
             node.textContent = '#';
-            node.value = '1';
+            node.value = 1;
+            node.style.backgroundColor = 'var(--white)';
             node.addEventListener("mouseenter", tryHere);
+            node.addEventListener("click", reset);
             root.appendChild(node);
         }
         root.appendChild(document.createElement("br"));
     }
+
+    root.addEventListener('mouseenter', function() {
+        root.style.backgroundColor = 'var(--gray)';
+    })
+
+    root.addEventListener('mouseleave', function() {
+        root.style.backgroundColor = 'var(--white)';
+    })
 
 });
