@@ -1,0 +1,8 @@
+.game{
+    margin:auto;
+    border: 1px solid black;
+}
+
+.game h1, h3{
+    padding-left: 1em;
+}
