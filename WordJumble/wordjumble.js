@@ -4,7 +4,7 @@ var lose = 0;
 var word = '';
 var gameTimer = 2; // time in minutes
 
-function shufflearray(array) {
+function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         const temp = array[i];
@@ -16,12 +16,16 @@ function shufflearray(array) {
 }
 
 function buildGame() {
+    if(word != ''){
+        word = '';
+    }
+
     $("#jumbleWord").empty();
 
     while(word.length < 5){
     word = wordArray[Math.floor(Math.random() * (wordArray.length))].toUpperCase();
     }
-    var jumbleWord = shufflearray(word.split(''));
+    var jumbleWord = shuffleArray(word.split(''));
 
     console.log(word);
     console.log(jumbleWord);
@@ -34,46 +38,44 @@ function buildGame() {
     })
 }
 
-function loseGame() {
-    lose += 1;
-    alert("game lose");
-}
-
-function winGame() {
-    wins += 1;
-    alert("game win");
-}
-
-function replay() {
+function replay(status) {
     // TODO: Handle the replay functionality here.
     // rebuild game and set a new timer.
-    document.getElementById("timer").innerHTML = '2:00';
-    timer = countdown(gameTimer);
-}
+    if(status == 'win'){
+        wins += 1;
+        var playAgain = confirm('Thats correct! Play again!');
+    } else if(status == 'lose'){
+        lose += 1;
+        var playAgain = confirm('Sorry thats incorrect. Play again?');
+    }
 
-function quit() {
-    // TODO: Handle the quit button functionality here.
-    // clear all timers, show user total score of wins vs loses.
+    if(playAgain){
+        document.getElementById("timer").innerHTML = '2:00';
+        buildGame();
+        timer = countdown(gameTimer);
+    } else {
+        clearInterval(timer);
+        alert("Thanks for playing! final score: Correct: " + wins + ". Incorrect: " + lose + "\nClosing this alert box will refresh page and reset scores.");
+        location.reload(true);
+    }  
 }
 
 function countdown(minutes) {
+    // got some help from the internet here as i was having trouble getting the display to update properly.
     let seconds = 60;
     let mins = minutes
-    let counter = document.getElementById("timer");
+    let counter = $("#timer");
     let current_minutes = mins-1
-    // we create an interval variable to clear it later
-    // we also use an arrow function to have access to variable
-    // outside of the current function's scope.
+    // create an interval variable so we can clear it later
     let interval = setInterval(() => {
       seconds--;
-      counter.innerHTML =
-      current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-      // our seconds have run out
+      counter.text(current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds));
+      // if our seconds have run out
       if(seconds <= 0) {
-        // our minutes have run out
+        // if our minutes have run out
         if(current_minutes <= 0) {
-          // clear the interval so it stops.
-          loseGame();
+          // call replay as a lose and clear interval
+          replay("lose");
           clearInterval(interval);
         } else {
           // otherwise, we decrement the number of minutes and change the seconds back to 60.
@@ -95,15 +97,19 @@ $(document).ready(() => {
     
     $("#submitAnswer").on("click", function(){
         clearInterval(timer);
-        replay();
         var userAnswer = $("#answer").val().toUpperCase();
         if(userAnswer.toUpperCase() == word){ 
-            winGame();
+            replay("win");
         } else {
-            loseGame();
+            replay("lose");
         }
         $("#answer").val('');
     });
+
+    $("#quit").on("click", function(){
+        clearInterval(timer);
+        replay("lose");
+    })
 
 });
 
