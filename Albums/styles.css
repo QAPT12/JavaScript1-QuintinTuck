@@ -1,12 +1,6 @@
-:root{
-    --white: #ffffff;
-}
-
 body{
-    margin:auto;
+    margin:10px auto;
     border: 2px solid black;
     width: 75%;
     padding:0.25em;
 }
-
-
