@@ -54,14 +54,14 @@ document.addEventListener("DOMContentLoaded", function(){
             const timerElement = document.getElementById("gameTimer");
       
             function updateTimer() {
-              seconds++;
-              if (seconds === 60) {
-                seconds = 0;
-                minutes++;
-              }
-      
-              const formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-              timerElement.value = formattedTime;
+                seconds++;
+                if (seconds === 60) {
+                  seconds = 0;
+                  minutes++;
+                }
+              
+                const formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                timerElement.value = formattedTime;
             }
       
             setInterval(updateTimer, 1000);
