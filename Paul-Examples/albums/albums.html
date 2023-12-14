@@ -1,0 +1,46 @@
+<!--
+    Using JavaScript, jQuery, and the Fetch API accessing jsonplaceholder,
+    create a simple website that will
+    1. create a selection list of the users found in the user resource. The 
+       initial value of the selection list is to be the first user delivered 
+       from the users resource.
+    2. display the names of the albums that the currently selected user has. 
+       Maybe an unordered list might work well.
+    3. whenever a different user is selected, a new album list should appear.
+-->
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Page Title</title>
+        <link rel="stylesheet" href="albums.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.js" defer></script>
+        <script src="albums.js" defer></script>
+    </head>
+    <body>
+        <main>
+            <h1>Albums Web Page </h1>
+            <h3>Using JSON and Fetch API</h3>
+
+            <label for="user">User</label>
+
+            <!-- 
+                Below is the selection list to which the JS will add 
+                options as they are discovered from jsonplaceholder.com 
+            -->
+            <select id="user"></select>
+
+            <!-- 
+                Under here is the unordered (bullet) list that the JS
+                will populate with <li> elements that are the albums
+                attributed to the currently selected user.
+            -->
+            <ul id="albumList">
+            </ul>
+
+        </main>
+    </body>
+</html>
