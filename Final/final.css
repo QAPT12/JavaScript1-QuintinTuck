@@ -1,0 +1,38 @@
+body{
+    margin: auto;
+    width:80%;
+}
+
+#users{
+    border: solid 1px black;
+    padding: 2em;
+    max-width: 20em;
+    display: inline-block;
+}
+
+#nameDiv button{
+    margin:.5em;
+}
+
+.selectedUser{
+    background-color: red;
+}
+
+.userInformation{
+    padding: 2em;
+    max-width: 20em;
+    display: inline-block;
+}
+
+.userInformation label{
+    display: inline;
+}
+
+.userInformation p{
+    color: red;
+    display: inline;
+}
+
+.spacer{
+    height: 10px;
+}
